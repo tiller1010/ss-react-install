@@ -7,5 +7,14 @@ module.exports = {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, 'themes/simple/javascript')
 	},
-	mode: 'development'
+	mode: 'development',
+	module: {
+		rules: [
+			{
+				use: {
+					loader: 'babel-loader'
+				}
+			}
+		]
+	}
 }
