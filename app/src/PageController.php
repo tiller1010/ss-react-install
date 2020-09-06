@@ -22,8 +22,21 @@ namespace {
 
         public function feedViewableData(HTTPRequest $request){
             /**/
+            $socialMediaLinks = [];
+            foreach($this->SiteConfig->SocialMediaLinks()->toArray() as $sml){
+                $link = [
+                    'Type' => $sml->Type,
+                    'Link' => $sml->Link,
+                    'Icon' => $sml->Icon
+                ];
+                array_push($socialMediaLinks, $link);
+            }
+
             $viewableData = [
-                'Content' => $this->Content
+                'Content' => $this->Content,
+                'SiteConfig_Title' => $this->SiteConfig->Title,
+                'SiteConfig_Phone' => $this->SiteConfig->Phone,
+                'SiteConfig_SocialMediaLinks' => json_encode($socialMediaLinks)
             ];
             /**/
             $this->response->addHeader('Content-Type', 'application/json');

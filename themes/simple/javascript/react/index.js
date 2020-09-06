@@ -33,7 +33,10 @@ class SiteContainer extends Component {
 		const data = await fetchViewableData();
 		if(data){
 			this.setState({
-				Content: data.Content
+				Content: data.Content,
+				SiteConfig_Title: data.SiteConfig_Title,
+				SiteConfig_Phone: data.SiteConfig_Phone,
+				SiteConfig_SocialMediaLinks: JSON.parse(data.SiteConfig_SocialMediaLinks)
 			});
 		}
 	}
@@ -43,6 +46,20 @@ class SiteContainer extends Component {
 			<div>
 				<h1>WebsiteYah</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
+				{	// If social media links
+					this.state.SiteConfig_SocialMediaLinks
+					? 	<ul>
+							{this.state.SiteConfig_SocialMediaLinks.map((sml) => 
+								<li key={this.state.SiteConfig_SocialMediaLinks.indexOf(sml)}>
+									<a href={sml.Link}>
+										<i className={`fa fa-${sml.Icon}`}></i>
+										{sml.Type}
+									</a>
+								</li>
+							)}
+						</ul>
+					: ''
+				}
 			</div>
 		);
 	}
@@ -101,10 +118,10 @@ class Window extends Component {
 		}
 
 	    return (
-	    	<div onClick={this.toggleNav} style={style}>
+	    	<div style={style}>
 	    		<p>{this.state.opened}</p>
 	    		<SiteContainer />
-	    		<NavigationContainer opened={this.state.opened}/>
+	    		<NavigationContainer onClick={this.toggleNav} opened={this.state.opened}/>
 			</div>
 		);
 	}
