@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { Router, Route, Switch } from "react-router";
+import { Link } from 'react-router-dom';
+import { createBrowserHistory } from "history";
 import ReactDOM from "react-dom";
 
 async function fetchViewableData(){
@@ -17,7 +20,7 @@ async function fetchViewableData(){
 	}
 }
 
-class SiteContainer extends Component {
+class PageContainer extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
@@ -44,7 +47,7 @@ class SiteContainer extends Component {
 	render(){
 		return (
 			<div>
-				<h1>WebsiteYah</h1>
+				<h1>React Code</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
 				{	// If social media links
 					this.state.SiteConfig_SocialMediaLinks
@@ -65,44 +68,14 @@ class SiteContainer extends Component {
 	}
 }
 
-const NavigationContainer = (props) => {
-
-	var navLinks = Array.from(document.querySelectorAll('header nav.primary li'));
-
-	var style;
-
-	if(props.opened){
-		style = {
-			right: 0,
-			position: 'absolute'
-		}
-	}
-	else{
-		style = {
-			right: '100px',
-			position: 'absolute'
-		}
-	}
-
-	return (
-		<div style={style}>
-			<ul>
-			{navLinks.map((item, key) => (
-				<li key={key}>{item.innerText}</li>
-			))}
-			</ul>
-		</div>
-	);
-}
-
 class Window extends Component {
-    constructor(props){
-    super(props);
-    this.state={
-      opened: false
-    }
-    this.toggleNav=this.toggleNav.bind(this);
-  }
+	constructor(props){
+	  super(props);
+	  this.state={
+	    opened: false
+	  }
+	  this.toggleNav=this.toggleNav.bind(this);
+	}
 
 	toggleNav(){
 		this.setState(prevState => ({
@@ -111,24 +84,57 @@ class Window extends Component {
 	}
 
 	render(){
+		var navLinks = Array.from(document.querySelectorAll('header nav.primary li a'));
+		var formattedNavLinks = [];
+		navLinks.forEach((link) => {
+			var formattedLink = {};
+			formattedLink.Title = link.innerText;
+			var urlSegment = link.href.split('/').reverse()[1] !== document.domain ? '/' + link.href.split('/').reverse()[1] : '/home';
+			formattedLink.URLSegment = urlSegment;
+			formattedNavLinks.push(formattedLink);
+		});
 
-		var style = {
-			position: 'relative',
-			height: '1000px'
+		var style;
+
+		if(this.state.opened){
+			style = {
+				right: 0,
+				position: 'absolute'
+			}
 		}
-
-	    return (
-	    	<div style={style}>
-	    		<p>{this.state.opened}</p>
-	    		<SiteContainer />
-	    		<NavigationContainer onClick={this.toggleNav} opened={this.state.opened}/>
+		else{
+			style = {
+				right: '100px',
+				position: 'absolute'
+			}
+		}
+		return (
+			<div style={style}>
+					<ul>
+						{formattedNavLinks.map((item) => (
+							<li key={formattedNavLinks.indexOf(item)}><Link to={item.URLSegment}>{item.Title}</Link></li>
+						))}
+					</ul>
+					<Switch>
+						<Route exact path='/'>
+							<PageContainer/>
+						</Route>
+						{formattedNavLinks.map((item) => (
+							<Route key={formattedNavLinks.indexOf(item)} exact path={item.URLSegment}>
+								<PageContainer/>
+							</Route>
+						))}
+					</Switch>
 			</div>
 		);
 	}
 }
 
+const history = createBrowserHistory();
 
 ReactDOM.render(
-	<Window />,
+	<Router history={history}>
+	    <Window/>
+	</Router>,
 	document.getElementById('react-entry')
 );
