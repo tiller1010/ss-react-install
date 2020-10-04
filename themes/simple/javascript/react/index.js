@@ -35,8 +35,9 @@ class PageContainer extends Component {
 	async loadViewableData(){
 		const data = await fetchViewableData();
 		if(data){
+			const parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
 			this.setState({
-				Content: data.Content,
+				Content: parsedContent,
 				SiteConfig_Title: data.SiteConfig_Title,
 				SiteConfig_Phone: data.SiteConfig_Phone,
 				SiteConfig_SocialMediaLinks: JSON.parse(data.SiteConfig_SocialMediaLinks)
@@ -98,14 +99,14 @@ class Window extends Component {
 
 		if(this.state.opened){
 			style = {
-				right: 0,
-				position: 'absolute'
+				// right: 0,
+				// position: 'absolute'
 			}
 		}
 		else{
 			style = {
-				right: '100px',
-				position: 'absolute'
+				// right: '100px',
+				// position: 'absolute'
 			}
 		}
 		return (
