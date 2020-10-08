@@ -33,10 +33,7 @@ Change it, enhance it and most importantly enjoy it!
 <body class="$ClassName.ShortName<% if not $Menu(2) %> no-sidebar<% end_if %>" <% if $i18nScriptDirection %>dir="$i18nScriptDirection"<% end_if %>>
 <% include Header %>
 <div class="main" role="main">
-	<div class="inner typography line">
-		$Layout
-		<div id='react-entry'></div>
-	</div>
+	<div id='react-entry'></div>
 </div>
 <% include Footer %>
 

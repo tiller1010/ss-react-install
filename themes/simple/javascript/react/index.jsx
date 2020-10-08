@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Router, Route, Switch } from "react-router";
 import { Link } from 'react-router-dom';
 import { createBrowserHistory } from "history";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import ReactDOM from "react-dom";
 
 async function fetchViewableData(){
@@ -47,7 +49,7 @@ class PageContainer extends Component {
 
 	render(){
 		return (
-			<div>
+			<div className='inner typography line'>
 				<h1>React Code</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
 				{	// If social media links
@@ -84,6 +86,17 @@ class Window extends Component {
 		}));
 	}
 
+	componentDidMount(){
+		const context = this;
+		window.addEventListener('resize', function(){
+			if(window.innerWidth > 815){
+				context.setState({
+					opened: false
+				});
+			}
+		})
+	}
+
 	render(){
 		var navLinks = Array.from(document.querySelectorAll('header nav.primary li a'));
 		var formattedNavLinks = [];
@@ -99,21 +112,22 @@ class Window extends Component {
 
 		if(this.state.opened){
 			style = {
-				// right: 0,
-				// position: 'absolute'
+				transform: 'translateX(-200px)'
 			}
 		}
 		else{
 			style = {
-				// right: '100px',
-				// position: 'absolute'
+				transform: 'translateX(0)'
 			}
 		}
 		return (
-			<div style={style}>
-					<ul>
+			<div style={style} className='window-component'>
+					<div className='main-nav-menu-button' onClick={this.toggleNav}>
+						<FontAwesomeIcon icon={faBars}/>
+					</div>
+					<ul className='main-nav-list'>
 						{formattedNavLinks.map((item) => (
-							<li key={formattedNavLinks.indexOf(item)}><Link to={item.URLSegment}>{item.Title}</Link></li>
+							<li key={formattedNavLinks.indexOf(item)} className='main-nav-list'><Link to={item.URLSegment}>{item.Title}</Link></li>
 						))}
 					</ul>
 					<Switch>

@@ -1,3 +1,85 @@
-i{
-	font-family: 'Font Awesome 5';
+html {
+  overflow-x: hidden;
+}
+
+.main {
+  padding-top: 0;
+}
+
+.window-component {
+  transition: transform 0.25s ease;
+}
+
+.inner.typography {
+  padding-top: 20px;
+}
+
+header.header[role=banner] {
+  display: none;
+}
+
+.main-nav-menu-button {
+  display: none;
+  font-size: 2em;
+  cursor: pointer;
+  padding: 20px;
+  transition: color 0.25s ease;
+}
+.main-nav-menu-button:hover {
+  color: #f22;
+}
+
+ul.main-nav-list {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  margin: 0;
+  list-style: none;
+}
+ul.main-nav-list li {
+  margin: 0 10px;
+  list-style-type: none;
+  transition: background-color 0.25s ease;
+}
+ul.main-nav-list li:hover {
+  background-color: #000;
+}
+ul.main-nav-list li:hover a {
+  color: #fff;
+}
+ul.main-nav-list li a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+}
+
+i {
+  font-family: "Font Awesome 5";
+}
+
+@media (max-width: 815px) {
+  .main-nav-menu-button {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+
+  ul.main-nav-list {
+    right: -200px;
+    height: 100vh;
+    width: 200px;
+    flex-direction: column;
+    background-color: #555;
+  }
+  ul.main-nav-list li {
+    margin: 0;
+  }
+  ul.main-nav-list li:hover {
+    background-color: #000;
+  }
+  ul.main-nav-list li a {
+    color: #fff;
+  }
 }
