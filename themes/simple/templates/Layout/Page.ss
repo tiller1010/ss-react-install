@@ -7,3 +7,8 @@
 		$Form
 		$CommentsForm
 </div> --%>
+<% if $Form %>
+	<div class="flex x-center">
+	    $Form
+	</div>
+<% end_if %>

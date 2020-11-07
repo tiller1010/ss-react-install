@@ -34,6 +34,9 @@ Change it, enhance it and most importantly enjoy it!
 <% include Header %>
 <div class="main" role="main">
 	<div id='react-entry'></div>
+	<% if $Form %>
+	    $Layout
+	<% end_if %>
 </div>
 <% include Footer %>
 

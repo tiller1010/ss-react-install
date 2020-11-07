@@ -6,6 +6,16 @@ html {
   padding-top: 0;
 }
 
+.flex {
+  display: flex;
+}
+.flex.x-center {
+  justify-content: center;
+}
+.flex.y-center {
+  align-items: center;
+}
+
 .window-component {
   transition: transform 0.25s ease;
 }

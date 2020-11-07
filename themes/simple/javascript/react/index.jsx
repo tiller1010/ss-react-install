@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Router, Route, Switch } from "react-router";
 import { Link } from 'react-router-dom';
+import Page from './pages/Page.jsx';
+import BlogPage from './pages/BlogPage.jsx';
 import { createBrowserHistory } from "history";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -22,54 +24,7 @@ async function fetchViewableData(){
 	}
 }
 
-class PageContainer extends Component {
-	constructor(props){
-		super(props);
-		this.state = {
-			Content: '<p></p>'
-		}
-	}
 
-	componentDidMount(){
-		this.loadViewableData();
-	}
-
-	async loadViewableData(){
-		const data = await fetchViewableData();
-		if(data){
-			const parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
-			this.setState({
-				Content: parsedContent,
-				SiteConfig_Title: data.SiteConfig_Title,
-				SiteConfig_Phone: data.SiteConfig_Phone,
-				SiteConfig_SocialMediaLinks: JSON.parse(data.SiteConfig_SocialMediaLinks)
-			});
-		}
-	}
-
-	render(){
-		return (
-			<div className='inner typography line'>
-				<h1>React Code</h1>
-				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
-				{	// If social media links
-					this.state.SiteConfig_SocialMediaLinks
-					? 	<ul>
-							{this.state.SiteConfig_SocialMediaLinks.map((sml) => 
-								<li key={this.state.SiteConfig_SocialMediaLinks.indexOf(sml)}>
-									<a href={sml.Link}>
-										<i className={`fa fa-${sml.Icon}`}></i>
-										{sml.Type}
-									</a>
-								</li>
-							)}
-						</ul>
-					: ''
-				}
-			</div>
-		);
-	}
-}
 
 class Window extends Component {
 	constructor(props){
@@ -78,12 +33,23 @@ class Window extends Component {
 	    opened: false
 	  }
 	  this.toggleNav=this.toggleNav.bind(this);
+	  this.renderSwitch=this.renderSwitch.bind(this);
 	}
 
 	toggleNav(){
 		this.setState(prevState => ({
 		  opened: !prevState.opened
 		}));
+	}
+
+	renderSwitch(pagetype){
+		switch(pagetype){
+			case 'Page':
+				return <Page fetchViewableData={fetchViewableData}/>
+			case 'BlogPage':
+				return <BlogPage fetchViewableData={fetchViewableData}/>
+			break;
+		}
 	}
 
 	componentDidMount(){
@@ -105,6 +71,7 @@ class Window extends Component {
 			formattedLink.Title = link.innerText;
 			var urlSegment = link.href.split('/').reverse()[1] !== document.domain ? '/' + link.href.split('/').reverse()[1] : '/home';
 			formattedLink.URLSegment = urlSegment;
+			formattedLink.pagetype = link.attributes.pagetype.value;
 			formattedNavLinks.push(formattedLink);
 		});
 
@@ -132,11 +99,12 @@ class Window extends Component {
 					</ul>
 					<Switch>
 						<Route exact path='/'>
-							<PageContainer/>
+							<Page fetchViewableData={fetchViewableData}/>
 						</Route>
 						{formattedNavLinks.map((item) => (
 							<Route key={formattedNavLinks.indexOf(item)} exact path={item.URLSegment}>
-								<PageContainer/>
+									{this.renderSwitch(item.pagetype)}
+								}
 							</Route>
 						))}
 					</Switch>
