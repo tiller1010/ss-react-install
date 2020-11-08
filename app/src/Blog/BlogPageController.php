@@ -5,11 +5,13 @@ use SilverStripe\Control\HTTPRequest;
 class BlogPageController extends PageController
 {
     private static $url_handlers = [
-        'fetchViewableData' => 'feedViewableData'
+        'fetchViewableData' => 'feedViewableData',
+        'articles/$articleURL' => 'renderArticle'
     ];
     /**/
     private static $allowed_actions = [
-        'feedViewableData'
+        'feedViewableData',
+        'renderArticle'
     ];
     /**/
     protected function init()
@@ -34,13 +36,14 @@ class BlogPageController extends PageController
             $link = [
                 'Title' => $article->Title,
                 'Content' => $article->Content,
-                'Image' => $article->Image,
+                'Image' => $article->Image->URL,
                 'URLSegment' => $article->URLSegment
             ];
             array_push($articles, $link);
         }
 
         $viewableData = [
+            'URLSegment' => $this->URLSegment,
             'Content' => $this->Content,
             'Articles' => json_encode($articles),
             'SiteConfig_Title' => $this->SiteConfig->Title,
@@ -50,5 +53,13 @@ class BlogPageController extends PageController
         /**/
         $this->response->addHeader('Content-Type', 'application/json');
         return json_encode($viewableData);
+    }
+
+    public function renderArticle(){
+        $articleURL = $this->getRequest()->param('articleURL');
+        $article = Article::get()->filter(['URLSegment' => $articleURL])->first();
+        if($article->exists()){
+            return $article->renderWith('Layout/Article');
+        }
     }
 }

@@ -104,7 +104,6 @@ class Window extends Component {
 						{formattedNavLinks.map((item) => (
 							<Route key={formattedNavLinks.indexOf(item)} exact path={item.URLSegment}>
 									{this.renderSwitch(item.pagetype)}
-								}
 							</Route>
 						))}
 					</Switch>
