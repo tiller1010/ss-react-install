@@ -4,6 +4,7 @@ class Page extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			Title: '...',
 			Content: '<p></p>'
 		}
 	}
@@ -13,10 +14,14 @@ class Page extends Component {
 	}
 
 	async loadViewableData(){
+		this.setState({
+			Content: '<div class="lds-facebook"><div></div><div></div><div></div></div>'
+		});
 		const data = await this.props.fetchViewableData();
 		if(data){
 			const parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
 			this.setState({
+				Title: data.Title,
 				Content: parsedContent,
 				SiteConfig_Title: data.SiteConfig_Title,
 				SiteConfig_Phone: data.SiteConfig_Phone,
@@ -28,7 +33,7 @@ class Page extends Component {
 	render(){
 		return (
 			<div className='inner typography line'>
-				<h1>React Code</h1>
+				<h1>{this.state.Title}</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
 				{	// If social media links
 					this.state.SiteConfig_SocialMediaLinks

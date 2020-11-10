@@ -37,9 +37,11 @@ class Window extends Component {
 	}
 
 	toggleNav(){
-		this.setState(prevState => ({
-		  opened: !prevState.opened
-		}));
+		if(window.innerWidth < 815){
+			this.setState(prevState => ({
+			  opened: !prevState.opened
+			}));
+		}
 	}
 
 	renderSwitch(pagetype){
@@ -92,11 +94,17 @@ class Window extends Component {
 					<div className='main-nav-menu-button' onClick={this.toggleNav}>
 						<FontAwesomeIcon icon={faBars}/>
 					</div>
-					<ul className='main-nav-list'>
-						{formattedNavLinks.map((item) => (
-							<li key={formattedNavLinks.indexOf(item)} className='main-nav-list'><Link to={item.URLSegment}>{item.Title}</Link></li>
-						))}
-					</ul>
+					<div className='nav'>
+						<ul className='main-nav-list'>
+							{formattedNavLinks.map((item) => (
+								<li onClick={this.toggleNav} key={formattedNavLinks.indexOf(item)} className='main-nav-list-item'>
+									<Link to={item.URLSegment}>
+										{item.Title}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
 					<Switch>
 						<Route exact path='/'>
 							<Page fetchViewableData={fetchViewableData}/>

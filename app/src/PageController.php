@@ -33,6 +33,7 @@ namespace {
             }
 
             $viewableData = [
+                'Title' => $this->Title,
                 'Content' => $this->Content,
                 'SiteConfig_Title' => $this->SiteConfig->Title,
                 'SiteConfig_Phone' => $this->SiteConfig->Phone,

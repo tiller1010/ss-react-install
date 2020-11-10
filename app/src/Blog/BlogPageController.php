@@ -43,6 +43,7 @@ class BlogPageController extends PageController
         }
 
         $viewableData = [
+            'Title' => $this->Title,
             'URLSegment' => $this->URLSegment,
             'Content' => $this->Content,
             'Articles' => json_encode($articles),

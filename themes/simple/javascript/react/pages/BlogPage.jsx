@@ -4,6 +4,7 @@ class BlogPage extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			Title: '...',
 			Content: '<p></p>',
 			ArticleMarkup: '<p></p>'
 		}
@@ -15,10 +16,14 @@ class BlogPage extends Component {
 	}
 
 	async loadViewableData(){
+		this.setState({
+			Content: '<div class="lds-facebook"><div></div><div></div><div></div></div>'
+		});
 		const data = await this.props.fetchViewableData();
 		if(data){
 			const parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
 			this.setState({
+				Title: data.Title,
 				URLSegment: data.URLSegment,
 				Content: parsedContent,
 				Articles: JSON.parse(data.Articles),
@@ -30,6 +35,9 @@ class BlogPage extends Component {
 	}
 
 	async renderArticle(event){
+		this.setState({
+			ArticleMarkup: '<div class="lds-facebook"><div></div><div></div><div></div></div>'
+		});
 		event.preventDefault();
 		if(event.currentTarget.href){
 			var route = event.currentTarget.href;
@@ -42,23 +50,24 @@ class BlogPage extends Component {
 	render(){
 		return (
 			<div className='inner typography line'>
-				<h1>React Code</h1>
-				<h2>Blog Page</h2>
+				<h1>{this.state.Title}</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
 				{	// If articles
 					this.state.Articles
-					? 	<ul>
+					? 	<ul className='blog-listing flex'>
 							{this.state.Articles.map((article) => 
 								<li key={this.state.Articles.indexOf(article)}>
 									<a onClick={this.renderArticle} href={`/${this.state.URLSegment}/articles/${article.URLSegment}`}>
-										<div dangerouslySetInnerHTML={{__html: article.Content}}></div>
+										<p>{article.Title}</p>
+										<div className='img-container'>
+											<img src={article.Image}/>
+										</div>
 									</a>
 								</li>
 							)}
 						</ul>
 					: ''
 				}
-				<h3>Current Article</h3>
 				<div dangerouslySetInnerHTML={{__html: this.state.ArticleMarkup}}></div>
 				{	// If social media links
 					this.state.SiteConfig_SocialMediaLinks
