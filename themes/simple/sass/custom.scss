@@ -90,6 +90,7 @@ header.header[role='banner']{
 	}
 }
 .nav{
+	z-index: 99;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -126,11 +127,48 @@ i{
 	font-family: 'Font Awesome 5';
 }
 
-.blog-listing{
+ul.blog-listing{
 	list-style: none;
+	margin: 0;
 	li{
 		list-style-type: none !important;
-		padding: 20px;
+		width: 33%;
+		a{
+			position: relative;
+			display: block;
+			overflow: hidden;
+			&:hover{
+				p{
+					background: #000000aa;
+				}
+				.img-container{
+					img{
+						transform: scale(1.1);
+					}
+				}
+			}
+			p{
+				z-index: 1;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: #00000055;
+				color: #fff;
+			}
+			.img-container{
+				height: 400px;
+				width: 100%;
+				img{
+					transition: transform .25s ease;
+					height: 100%;
+					width: 100%;
+					object-fit: cover;
+				}
+			}
+		}
 	}
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, withRouter } from 'react-router-dom';
 
 class BlogPage extends Component {
 	constructor(props){
@@ -11,8 +12,15 @@ class BlogPage extends Component {
 		this.renderArticle = this.renderArticle.bind(this);
 	}
 
-	componentDidMount(){
-		this.loadViewableData();
+	async componentDidMount(){
+		await this.loadViewableData();
+		this.renderArticle();
+	}
+
+	componentDidUpdate(prevProps){
+		if(prevProps.location.key !== this.props.location.key){
+			this.renderArticle();
+		}
 	}
 
 	async loadViewableData(){
@@ -34,16 +42,16 @@ class BlogPage extends Component {
 		}
 	}
 
-	async renderArticle(event){
-		this.setState({
-			ArticleMarkup: '<div class="lds-facebook"><div></div><div></div><div></div></div>'
-		});
-		event.preventDefault();
-		if(event.currentTarget.href){
-			var route = event.currentTarget.href;
-			await fetch(route)
+	async renderArticle(){
+		if(/\/articles\/\w+/.test(document.location)){
+			this.setState({
+				ArticleMarkup: '<div class="lds-facebook"><div></div><div></div><div></div></div>'
+			});
+			await fetch(document.location, {headers: {'x-requested-with': 'XMLHttpRequest'}})
 				.then(response => response.text())
 				.then(response => this.setState({ArticleMarkup: response}));
+		} else {
+			this.setState({ArticleMarkup: '<p></p>'});
 		}
 	}
 
@@ -52,23 +60,26 @@ class BlogPage extends Component {
 			<div className='inner typography line'>
 				<h1>{this.state.Title}</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
+				<div dangerouslySetInnerHTML={{__html: this.state.ArticleMarkup}}></div>
 				{	// If articles
 					this.state.Articles
-					? 	<ul className='blog-listing flex'>
-							{this.state.Articles.map((article) => 
-								<li key={this.state.Articles.indexOf(article)}>
-									<a onClick={this.renderArticle} href={`/${this.state.URLSegment}/articles/${article.URLSegment}`}>
-										<p>{article.Title}</p>
-										<div className='img-container'>
-											<img src={article.Image}/>
-										</div>
-									</a>
-								</li>
-							)}
-						</ul>
+					? 	<div>
+							<h2>Latest Articles</h2>
+							<ul className='blog-listing flex'>
+								{this.state.Articles.map((article) => 
+									<li key={this.state.Articles.indexOf(article)}>
+										<Link to={`/${this.state.URLSegment}/articles/${article.URLSegment}`}>
+											<p>{article.Title}</p>
+											<div className='img-container'>
+												<img src={article.Image}/>
+											</div>
+										</Link>
+									</li>
+								)}
+							</ul>
+						</div>
 					: ''
 				}
-				<div dangerouslySetInnerHTML={{__html: this.state.ArticleMarkup}}></div>
 				{	// If social media links
 					this.state.SiteConfig_SocialMediaLinks
 					? 	<ul>
@@ -88,4 +99,4 @@ class BlogPage extends Component {
 	}
 }
 
-export default BlogPage;
+export default withRouter(BlogPage);

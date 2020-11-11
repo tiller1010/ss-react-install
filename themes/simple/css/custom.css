@@ -91,6 +91,7 @@ header.header[role=banner] {
 }
 
 .nav {
+  z-index: 99;
   position: absolute;
   top: 0;
   right: 0;
@@ -128,12 +129,45 @@ i {
   font-family: "Font Awesome 5";
 }
 
-.blog-listing {
+ul.blog-listing {
   list-style: none;
+  margin: 0;
 }
-.blog-listing li {
+ul.blog-listing li {
   list-style-type: none !important;
-  padding: 20px;
+  width: 33%;
+}
+ul.blog-listing li a {
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+ul.blog-listing li a:hover p {
+  background: #000000aa;
+}
+ul.blog-listing li a:hover .img-container img {
+  transform: scale(1.1);
+}
+ul.blog-listing li a p {
+  z-index: 1;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #00000055;
+  color: #fff;
+}
+ul.blog-listing li a .img-container {
+  height: 400px;
+  width: 100%;
+}
+ul.blog-listing li a .img-container img {
+  transition: transform 0.25s ease;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
 @media (max-width: 815px) {

@@ -110,7 +110,7 @@ class Window extends Component {
 							<Page fetchViewableData={fetchViewableData}/>
 						</Route>
 						{formattedNavLinks.map((item) => (
-							<Route key={formattedNavLinks.indexOf(item)} exact path={item.URLSegment}>
+							<Route key={formattedNavLinks.indexOf(item)} path={item.URLSegment}>
 									{this.renderSwitch(item.pagetype)}
 							</Route>
 						))}

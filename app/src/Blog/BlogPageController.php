@@ -6,6 +6,7 @@ class BlogPageController extends PageController
 {
     private static $url_handlers = [
         'fetchViewableData' => 'feedViewableData',
+        'articles/$articleURL/fetchViewableData' => 'feedViewableData',
         'articles/$articleURL' => 'renderArticle'
     ];
     /**/
@@ -57,10 +58,14 @@ class BlogPageController extends PageController
     }
 
     public function renderArticle(){
-        $articleURL = $this->getRequest()->param('articleURL');
-        $article = Article::get()->filter(['URLSegment' => $articleURL])->first();
-        if($article->exists()){
-            return $article->renderWith('Layout/Article');
+        if($this->getRequest()->isAjax()){
+            $articleURL = $this->getRequest()->param('articleURL');
+            $article = Article::get()->filter(['URLSegment' => $articleURL])->first();
+            if($article->exists()){
+                return $article->renderWith('Layout/Article');
+            }
+        } else {
+            return $this;
         }
     }
 }
