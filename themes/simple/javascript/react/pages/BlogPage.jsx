@@ -67,7 +67,7 @@ class BlogPage extends Component {
 							<h2>Latest Articles</h2>
 							<ul className='blog-listing flex'>
 								{this.state.Articles.map((article) => 
-									<li key={this.state.Articles.indexOf(article)}>
+									<li className="d-33 m-100" key={this.state.Articles.indexOf(article)}>
 										<Link to={`/${this.state.URLSegment}/articles/${article.URLSegment}`}>
 											<p>{article.Title}</p>
 											<div className='img-container'>

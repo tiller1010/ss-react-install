@@ -13,6 +13,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'themes/simple')
 	},
 	mode: 'development',
+	devtool: 'source-map',
 	module: {
 		rules: [
 			{
