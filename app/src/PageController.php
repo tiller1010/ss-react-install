@@ -35,6 +35,7 @@ namespace {
             $viewableData = [
                 'Title' => $this->Title,
                 'Content' => $this->Content,
+                'ElementalArea' => $this->ElementalArea->forTemplate()->RAW(),
                 'SiteConfig_Title' => $this->SiteConfig->Title,
                 'SiteConfig_Phone' => $this->SiteConfig->Phone,
                 'SiteConfig_SocialMediaLinks' => json_encode($socialMediaLinks)

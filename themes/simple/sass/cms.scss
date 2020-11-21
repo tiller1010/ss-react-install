@@ -1,0 +1,14 @@
+.element-editor__element[title="Edit this Columns Element block"]{
+	.tab-content{
+		.fade.show{
+			display: flex;
+			flex-wrap: wrap;
+			.field.CompositeField.textcheckboxgroup{
+				width: 100%;
+			}
+			.htmleditor{
+				width: 33%;
+			}
+		}
+	}
+}

@@ -5,7 +5,8 @@ module.exports = {
 	entry: [
 		'@babel/polyfill',
 		path.resolve(__dirname, 'themes/simple/javascript/react/index.jsx'),
-		path.resolve(__dirname, 'themes/simple/sass/custom.scss')
+		path.resolve(__dirname, 'themes/simple/sass/custom.scss'),
+		path.resolve(__dirname, 'themes/simple/sass/cms.scss')
 	],
 	output: {
 		filename: 'javascript/bundle.js',

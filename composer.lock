@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b408cbac422747e5e0ca862f1daa9aa",
+    "content-hash": "9aa86f0299d0bd8af73c4ddf77e9b15e",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -311,6 +311,78 @@
                 }
             ],
             "time": "2020-04-07T06:57:05+00:00"
+        },
+        {
+            "name": "dnadesign/silverstripe-elemental",
+            "version": "4.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dnadesign/silverstripe-elemental.git",
+                "reference": "8f59904bea12c28448c68c53146b3476361a606d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dnadesign/silverstripe-elemental/zipball/8f59904bea12c28448c68c53146b3476361a606d",
+                "reference": "8f59904bea12c28448c68c53146b3476361a606d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1",
+                "silverstripe/admin": "^1.4@dev",
+                "silverstripe/cms": "^4.4@dev",
+                "silverstripe/vendor-plugin": "^1",
+                "silverstripe/versioned": "^1.3@dev",
+                "silverstripe/versioned-admin": "^1.2@dev",
+                "symbiote/silverstripe-gridfieldextensions": "^3.1"
+            },
+            "require-dev": {
+                "silverstripe/recipe-testing": "1.x-dev"
+            },
+            "suggest": {
+                "dnadesign/silverstripe-elemental-subsites": "Adds subsite support to elemental",
+                "dnadesign/silverstripe-elemental-userforms": "Adds userform support to elemental",
+                "dnadesign/silverstripe-elemental-virtual": "Adds support to share blocks between pages",
+                "silverstripe/elemental-blocks": "Adds a set of common SilverStripe content block types",
+                "silverstripe/fulltextsearch": "Adds fulltext search capability for elements using Solr"
+            },
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "branch-alias": {
+                    "4.x-dev": "4.4.x-dev"
+                },
+                "expose": [
+                    "client/dist",
+                    "client/lang"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "DNADesign\\Elemental\\": "src/",
+                    "DNADesign\\Elemental\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Saelens",
+                    "email": "alexandre.saelens@dna.co.nz"
+                }
+            ],
+            "description": "Elemental pagetype and collection of Elements",
+            "keywords": [
+                "Content Blocks",
+                "element",
+                "elemental",
+                "silverstripe"
+            ],
+            "support": {
+                "issues": "https://github.com/dnadesign/silverstripe-elemental/issues",
+                "source": "https://github.com/dnadesign/silverstripe-elemental/tree/4.4.1"
+            },
+            "time": "2020-08-28T02:18:24+00:00"
         },
         {
             "name": "embed/embed",
@@ -2026,23 +2098,23 @@
         },
         {
             "name": "silverstripe/recipe-plugin",
-            "version": "1.4.0",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/silverstripe/recipe-plugin.git",
-                "reference": "374f223a17434a6fbb9e85353f9e95987a7fc044"
+                "reference": "da7ccb0a0968b165f122d7763280f722ea2d3c5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silverstripe/recipe-plugin/zipball/374f223a17434a6fbb9e85353f9e95987a7fc044",
-                "reference": "374f223a17434a6fbb9e85353f9e95987a7fc044",
+                "url": "https://api.github.com/repos/silverstripe/recipe-plugin/zipball/da7ccb0a0968b165f122d7763280f722ea2d3c5b",
+                "reference": "da7ccb0a0968b165f122d7763280f722ea2d3c5b",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.1|^2"
+                "composer-plugin-api": "^1.1 || ^2"
             },
             "require-dev": {
-                "composer/composer": "^1.2|2"
+                "composer/composer": "^1.2 || 2"
             },
             "type": "composer-plugin",
             "extra": {
@@ -2066,9 +2138,9 @@
             "description": "Helper plugin to install SilverStripe recipes",
             "support": {
                 "issues": "https://github.com/silverstripe/recipe-plugin/issues",
-                "source": "https://github.com/silverstripe/recipe-plugin/tree/1.4.0"
+                "source": "https://github.com/silverstripe/recipe-plugin/tree/1.5.0"
             },
-            "time": "2020-10-26T00:55:21+00:00"
+            "time": "2020-11-11T03:37:26+00:00"
         },
         {
             "name": "silverstripe/reports",
@@ -2417,6 +2489,76 @@
                 "source": "https://github.com/swiftmailer/swiftmailer/tree/v5.4.12"
             },
             "time": "2018-07-31T09:26:32+00:00"
+        },
+        {
+            "name": "symbiote/silverstripe-gridfieldextensions",
+            "version": "3.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symbiote/silverstripe-gridfieldextensions.git",
+                "reference": "c77d9d1de3df6ba838d2b34733567eab1df577dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symbiote/silverstripe-gridfieldextensions/zipball/c77d9d1de3df6ba838d2b34733567eab1df577dd",
+                "reference": "c77d9d1de3df6ba838d2b34733567eab1df577dd",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "~4.0",
+                "silverstripe/vendor-plugin": "^1.0"
+            },
+            "replace": {
+                "ajshort/silverstripe-gridfieldextensions": "self.version",
+                "silverstripe-australia/gridfieldextensions": "self.version"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7",
+                "silverstripe/versioned": "^1",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "screenshots": [
+                    "docs/en/_images/editable-rows.png",
+                    "docs/en/_images/add-existing-search.png"
+                ],
+                "expose": [
+                    "css",
+                    "javascript"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symbiote\\GridFieldExtensions\\": "src/",
+                    "Symbiote\\GridFieldExtensions\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Short",
+                    "email": "andrewjshort@gmail.com"
+                },
+                {
+                    "name": "Marcus Nyeholt",
+                    "email": "marcus@symbiote.com.au"
+                }
+            ],
+            "description": "A collection of useful grid field components",
+            "homepage": "http://github.com/symbiote/silverstripe-gridfieldextensions",
+            "keywords": [
+                "gridfield",
+                "silverstripe"
+            ],
+            "support": {
+                "issues": "http://github.com/symbiote/silverstripe-gridfieldextensions/issues",
+                "source": "https://github.com/symbiote/silverstripe-gridfieldextensions/tree/3.2.4"
+            },
+            "time": "2020-07-30T04:46:06+00:00"
         },
         {
             "name": "symfony/cache",
@@ -3074,6 +3216,37 @@
             "time": "2020-10-24T10:57:07+00:00"
         },
         {
+            "name": "tbone/elemental-extension",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tiller1010/elemental-extension.git",
+                "reference": "17b4d1b41c9787ba72d545c89482a8c67d5ec5e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tiller1010/elemental-extension/zipball/17b4d1b41c9787ba72d545c89482a8c67d5ec5e7",
+                "reference": "17b4d1b41c9787ba72d545c89482a8c67d5ec5e7",
+                "shasum": ""
+            },
+            "require": {
+                "dnadesign/silverstripe-elemental": "^4"
+            },
+            "default-branch": true,
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "expose": [
+                    "client/dist"
+                ]
+            },
+            "description": "Elemental extension",
+            "support": {
+                "source": "https://github.com/tiller1010/elemental-extension/tree/master",
+                "issues": "https://github.com/tiller1010/elemental-extension/issues"
+            },
+            "time": "2020-06-27T17:43:48+00:00"
+        },
+        {
             "name": "webonyx/graphql-php",
             "version": "v0.12.6",
             "source": {
@@ -3126,36 +3299,31 @@
     "packages-dev": [
         {
             "name": "doctrine/instantiator",
-            "version": "1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "f350df0268e904597e3bd9c4685c53e0e333feea"
+                "reference": "d56bf6102915de5702778fe20f2de3b2fe570b5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/f350df0268e904597e3bd9c4685c53e0e333feea",
-                "reference": "f350df0268e904597e3bd9c4685c53e0e333feea",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/d56bf6102915de5702778fe20f2de3b2fe570b5b",
+                "reference": "d56bf6102915de5702778fe20f2de3b2fe570b5b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^6.0",
+                "doctrine/coding-standard": "^8.0",
                 "ext-pdo": "*",
                 "ext-phar": "*",
-                "phpbench/phpbench": "^0.13",
-                "phpstan/phpstan-phpunit": "^0.11",
-                "phpstan/phpstan-shim": "^0.11",
-                "phpunit/phpunit": "^7.0"
+                "phpbench/phpbench": "^0.13 || 1.0.0-alpha2",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-phpunit": "^0.12",
+                "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
@@ -3169,7 +3337,7 @@
                 {
                     "name": "Marco Pivetta",
                     "email": "ocramius@gmail.com",
-                    "homepage": "http://ocramius.github.com/"
+                    "homepage": "https://ocramius.github.io/"
                 }
             ],
             "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
@@ -3180,7 +3348,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/1.3.x"
+                "source": "https://github.com/doctrine/instantiator/tree/1.4.0"
             },
             "funding": [
                 {
@@ -3196,20 +3364,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-29T17:27:14+00:00"
+            "time": "2020-11-10T18:47:58+00:00"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.10.1",
+            "version": "1.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5"
+                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
-                "reference": "969b211f9a51aa1f6c01d1d2aef56d3bd91598e5",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/776f831124e9c62e1a2c601ecc52e776d8bb7220",
+                "reference": "776f831124e9c62e1a2c601ecc52e776d8bb7220",
                 "shasum": ""
             },
             "require": {
@@ -3246,7 +3414,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.x"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.10.2"
             },
             "funding": [
                 {
@@ -3254,7 +3422,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-29T13:22:24+00:00"
+            "time": "2020-11-13T09:40:50+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",

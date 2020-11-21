@@ -8,6 +8,7 @@ html {
 
 .flex {
   display: flex;
+  flex-wrap: wrap;
 }
 .flex.x-center {
   justify-content: center;
@@ -24,6 +25,14 @@ html {
   max-height: 400px;
   object-fit: contain;
   border: none;
+}
+
+.pad {
+  padding: 20px;
+}
+
+.d-33 {
+  width: 33%;
 }
 
 .lds-facebook {
@@ -170,6 +179,10 @@ ul.blog-listing li a .img-container img {
   object-fit: cover;
 }
 
+.columns-element img {
+  width: 100%;
+}
+
 @media (max-width: 815px) {
   .main-nav-menu-button {
     display: block;
@@ -196,5 +209,9 @@ ul.blog-listing li a .img-container img {
   }
   .nav ul.main-nav-list li a {
     color: #fff;
+  }
+
+  .m-100 {
+    width: 100%;
   }
 }

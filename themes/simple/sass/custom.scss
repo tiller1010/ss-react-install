@@ -8,6 +8,7 @@ html{
 
 .flex{
 	display: flex;
+	flex-wrap: wrap;
 	&.x-center{
 		justify-content: center;
 	}
@@ -26,6 +27,13 @@ html{
 	}
 }
 
+.pad{
+	padding: 20px;
+}
+
+.d-33{
+	width: 33%;
+}
 
 // Start Loader
 .lds-facebook {
@@ -172,6 +180,12 @@ ul.blog-listing{
 	}
 }
 
+.columns-element{
+	img{
+		width: 100%;
+	}
+}
+
 @media (max-width: 815px){
 	.main-nav-menu-button{
 		display: block;
@@ -197,5 +211,8 @@ ul.blog-listing{
 				}
 			}
 		}
+	}
+	.m-100{
+		width: 100%;
 	}
 }

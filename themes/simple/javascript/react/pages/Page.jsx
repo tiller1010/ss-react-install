@@ -23,6 +23,7 @@ class Page extends Component {
 			this.setState({
 				Title: data.Title,
 				Content: parsedContent,
+				ElementalArea: data.ElementalArea,
 				SiteConfig_Title: data.SiteConfig_Title,
 				SiteConfig_Phone: data.SiteConfig_Phone,
 				SiteConfig_SocialMediaLinks: JSON.parse(data.SiteConfig_SocialMediaLinks)
@@ -35,6 +36,7 @@ class Page extends Component {
 			<div className='inner typography line'>
 				<h1>{this.state.Title}</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
+				<div dangerouslySetInnerHTML={{__html: this.state.ElementalArea}}></div>
 				{	// If social media links
 					this.state.SiteConfig_SocialMediaLinks
 					? 	<ul>
