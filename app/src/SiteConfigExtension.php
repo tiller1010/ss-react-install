@@ -32,7 +32,7 @@ class SiteConfigExtension extends DataExtension {
 		$fields->addFieldToTab('Root.Main', UploadField::create('Logo'));
 		$fields->addFieldToTab('Root.Main', TextField::create('Phone'));
 		$fields->addFieldToTab('Root.Main', TextField::create('Email'));
-		$fields->addFieldToTab('Root.Main',
+		$fields->addFieldToTab('Root.Social',
 			Gridfield::create(
 				'SocialMediaLinks',
 				'Social Media Links',

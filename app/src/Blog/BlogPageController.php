@@ -47,6 +47,7 @@ class BlogPageController extends PageController
             'Title' => $this->Title,
             'URLSegment' => $this->URLSegment,
             'Content' => $this->Content,
+            'ElementalArea' => $this->ElementalArea->forTemplate()->RAW(),
             'Articles' => json_encode($articles),
             'SiteConfig_Title' => $this->SiteConfig->Title,
             'SiteConfig_Phone' => $this->SiteConfig->Phone,

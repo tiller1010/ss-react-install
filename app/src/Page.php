@@ -2,6 +2,8 @@
 
 namespace {
 
+    use SilverStripe\Forms\Tab;
+    use SilverStripe\Forms\TabSet;
     use SilverStripe\CMS\Model\SiteTree;
     use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
@@ -15,7 +17,20 @@ namespace {
         {
         	$fields = parent::getCMSFields();
 
-        	$fields->addFieldToTab('Root.Main', HTMLEditorField::create('Content'), 'ElementalArea');
+            $ElementalArea = $fields->fieldByName('Root.Main.ElementalArea');
+            $fields->removeByName('ElementalArea');
+
+            $fields->insertAfter(new TabSet(
+                'PageContent',
+                new Tab(
+                    'HTML Content',
+                    HTMLEditorField::create('Content')
+                ),
+                new Tab(
+                    'Elemental',
+                    $ElementalArea
+                )
+            ), 'Navigation Label');
 
         	return $fields;
         }

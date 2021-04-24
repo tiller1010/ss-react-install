@@ -29,11 +29,18 @@ class BlogPage extends Component {
 		});
 		const data = await this.props.fetchViewableData();
 		if(data){
-			const parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
+			if(data.Title){
+				document.querySelector('title').innerHTML = data.Title;
+			}
+			let parsedContent = '<p></p>';
+			if(data.Content){
+				parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
+			}
 			this.setState({
 				Title: data.Title,
 				URLSegment: data.URLSegment,
 				Content: parsedContent,
+				ElementalArea: data.ElementalArea,
 				Articles: JSON.parse(data.Articles),
 				SiteConfig_Title: data.SiteConfig_Title,
 				SiteConfig_Phone: data.SiteConfig_Phone,
@@ -60,6 +67,20 @@ class BlogPage extends Component {
 			<div className='inner typography line'>
 				<h1>{this.state.Title}</h1>
 				<div dangerouslySetInnerHTML={{__html: this.state.Content}}></div>
+				{	// If social media links
+					this.state.SiteConfig_SocialMediaLinks
+					? 	<ul className="social-banner">
+							{this.state.SiteConfig_SocialMediaLinks.map((sml) => 
+								<li key={this.state.SiteConfig_SocialMediaLinks.indexOf(sml)}>
+									<a href={sml.Link}>
+										<i className={`fa fa-${sml.Icon}`}></i>
+										{sml.Type}
+									</a>
+								</li>
+							)}
+						</ul>
+					: ''
+				}
 				<div dangerouslySetInnerHTML={{__html: this.state.ArticleMarkup}}></div>
 				{	// If articles
 					this.state.Articles
@@ -80,20 +101,7 @@ class BlogPage extends Component {
 						</div>
 					: ''
 				}
-				{	// If social media links
-					this.state.SiteConfig_SocialMediaLinks
-					? 	<ul>
-							{this.state.SiteConfig_SocialMediaLinks.map((sml) => 
-								<li key={this.state.SiteConfig_SocialMediaLinks.indexOf(sml)}>
-									<a href={sml.Link}>
-										<i className={`fa fa-${sml.Icon}`}></i>
-										{sml.Type}
-									</a>
-								</li>
-							)}
-						</ul>
-					: ''
-				}
+				<div dangerouslySetInnerHTML={{__html: this.state.ElementalArea}}></div>
 			</div>
 		);
 	}

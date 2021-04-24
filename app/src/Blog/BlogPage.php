@@ -1,8 +1,10 @@
 <?php
 
 use SilverStripe\Forms\Tab;
+use SilverStripe\Forms\TabSet;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
+use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 
 class BlogPage extends Page {
 	
@@ -16,7 +18,7 @@ class BlogPage extends Page {
 	{
 		$fields = parent::getCMSFields();
 
-		$fields->insertBefore(new Tab(
+		$fields->insertAfter(new Tab(
 			'Articles',
 			GridField::create(
 				'Articles',
@@ -24,7 +26,7 @@ class BlogPage extends Page {
 				$this->Articles(),
 				GridFieldConfig_RecordEditor::create()
 			)
-		), 'Content');
+		), 'Elemental');
 
 		return $fields;
 	}

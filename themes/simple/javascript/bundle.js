@@ -57226,11 +57226,21 @@ function (_Component) {
               data = _context2.sent;
 
               if (data) {
-                parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
+                if (data.Title) {
+                  document.querySelector('title').innerHTML = data.Title;
+                }
+
+                parsedContent = '<p></p>';
+
+                if (data.Content) {
+                  parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
+                }
+
                 this.setState({
                   Title: data.Title,
                   URLSegment: data.URLSegment,
                   Content: parsedContent,
+                  ElementalArea: data.ElementalArea,
                   Articles: JSON.parse(data.Articles),
                   SiteConfig_Title: data.SiteConfig_Title,
                   SiteConfig_Phone: data.SiteConfig_Phone,
@@ -57302,7 +57312,18 @@ function (_Component) {
         dangerouslySetInnerHTML: {
           __html: this.state.Content
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), // If social media links
+      this.state.SiteConfig_SocialMediaLinks ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "social-banner"
+      }, this.state.SiteConfig_SocialMediaLinks.map(function (sml) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: _this3.state.SiteConfig_SocialMediaLinks.indexOf(sml)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: sml.Link
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+          className: "fa fa-".concat(sml.Icon)
+        }), sml.Type));
+      })) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         dangerouslySetInnerHTML: {
           __html: this.state.ArticleMarkup
         }
@@ -57320,16 +57341,11 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: article.Image
         }))));
-      }))) : '', // If social media links
-      this.state.SiteConfig_SocialMediaLinks ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.SiteConfig_SocialMediaLinks.map(function (sml) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: _this3.state.SiteConfig_SocialMediaLinks.indexOf(sml)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: sml.Link
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-          className: "fa fa-".concat(sml.Icon)
-        }), sml.Type));
-      })) : '');
+      }))) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        dangerouslySetInnerHTML: {
+          __html: this.state.ElementalArea
+        }
+      }));
     }
   }]);
 
@@ -57412,7 +57428,16 @@ function (_Component) {
               data = _context.sent;
 
               if (data) {
-                parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
+                if (data.Title) {
+                  document.querySelector('title').innerHTML = data.Title;
+                }
+
+                parsedContent = '<p></p>';
+
+                if (data.Content) {
+                  parsedContent = data.Content.replace(/\[image(.*)\]/, '<img $1 />');
+                }
+
                 this.setState({
                   Title: data.Title,
                   Content: parsedContent,
@@ -57441,12 +57466,10 @@ function (_Component) {
         dangerouslySetInnerHTML: {
           __html: this.state.Content
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        dangerouslySetInnerHTML: {
-          __html: this.state.ElementalArea
-        }
       }), // If social media links
-      this.state.SiteConfig_SocialMediaLinks ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, this.state.SiteConfig_SocialMediaLinks.map(function (sml) {
+      this.state.SiteConfig_SocialMediaLinks ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "social-banner"
+      }, this.state.SiteConfig_SocialMediaLinks.map(function (sml) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: _this2.state.SiteConfig_SocialMediaLinks.indexOf(sml)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
@@ -57454,7 +57477,11 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
           className: "fa fa-".concat(sml.Icon)
         }), sml.Type));
-      })) : '');
+      })) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        dangerouslySetInnerHTML: {
+          __html: this.state.ElementalArea
+        }
+      }));
     }
   }]);
 
