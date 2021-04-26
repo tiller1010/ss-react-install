@@ -18,6 +18,12 @@
         "phpunit/phpunit": "^5.7"
     },
     "extra": {
+	"expose": [
+            "themes/simple/css",
+            "themes/simple/images",
+            "themes/simple/javascript",
+            "themes/simple/webfonts"
+        ],
         "project-files": [
             "app/_config/*",
             ".env.example"
