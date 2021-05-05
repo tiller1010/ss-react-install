@@ -57062,15 +57062,31 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var navLinks = Array.from(document.querySelectorAll('header nav.primary li a'));
+      // Used for routing
+      var allFormattedNavLinks = []; // Get top level nav links
+
+      var navLinks = Array.from(document.querySelectorAll('header nav.primary > ul > li > a'));
       var formattedNavLinks = [];
       navLinks.forEach(function (link) {
         var formattedLink = {};
         formattedLink.Title = link.innerText;
         var urlSegment = link.href.split('/').reverse()[1] !== document.domain ? '/' + link.href.split('/').reverse()[1] : '/home';
         formattedLink.URLSegment = urlSegment;
-        formattedLink.pagetype = link.attributes.pagetype.value;
+        formattedLink.pagetype = link.attributes.pagetype.value; // Get dropdown nav links
+
+        formattedLink.children = [];
+        var subPages = Array.from(link.parentElement.querySelectorAll('ul.nav-dropdown li a'));
+        subPages.forEach(function (subPage) {
+          var formattedSubPageLink = {};
+          formattedSubPageLink.Title = subPage.innerText;
+          var subPageUrlSegment = subPage.href.replace(document.location.origin, '');
+          formattedSubPageLink.URLSegment = subPageUrlSegment;
+          formattedSubPageLink.pagetype = subPage.attributes.pagetype.value;
+          formattedLink.children.push(formattedSubPageLink);
+          allFormattedNavLinks.push(formattedSubPageLink);
+        });
         formattedNavLinks.push(formattedLink);
+        allFormattedNavLinks.push(formattedLink);
       });
       var style;
 
@@ -57103,15 +57119,24 @@ function (_Component) {
           className: "main-nav-list-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
           to: item.URLSegment
-        }, item.Title));
+        }, item.Title), item.children.length ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+          className: "main-nav-dropdown"
+        }, item.children.map(function (subPageItem) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            onClick: _this2.toggleNav,
+            key: item.children.indexOf(subPageItem)
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
+            to: subPageItem.URLSegment
+          }, subPageItem.Title));
+        })) : '');
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
         exact: true,
         path: "/"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_pages_Page_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
         fetchViewableData: fetchViewableData
-      })), formattedNavLinks.map(function (item) {
+      })), allFormattedNavLinks.map(function (item) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          key: formattedNavLinks.indexOf(item),
+          key: allFormattedNavLinks.indexOf(item),
           path: item.URLSegment
         }, _this2.renderSwitch(item.pagetype));
       })));
@@ -57558,9 +57583,9 @@ module.exports = content.locals || {};
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! @babel/polyfill */"./node_modules/@babel/polyfill/lib/index.js");
-__webpack_require__(/*! C:\xampp\htdocs\ss-react-install\themes\simple\javascript\react\index.jsx */"./themes/simple/javascript/react/index.jsx");
-__webpack_require__(/*! C:\xampp\htdocs\ss-react-install\themes\simple\sass\custom.scss */"./themes/simple/sass/custom.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\ss-react-install\themes\simple\sass\cms.scss */"./themes/simple/sass/cms.scss");
+__webpack_require__(/*! C:\Users\tille\SilverStripeSites\ss-react-install-hs\themes\simple\javascript\react\index.jsx */"./themes/simple/javascript/react/index.jsx");
+__webpack_require__(/*! C:\Users\tille\SilverStripeSites\ss-react-install-hs\themes\simple\sass\custom.scss */"./themes/simple/sass/custom.scss");
+module.exports = __webpack_require__(/*! C:\Users\tille\SilverStripeSites\ss-react-install-hs\themes\simple\sass\cms.scss */"./themes/simple/sass/cms.scss");
 
 
 /***/ })

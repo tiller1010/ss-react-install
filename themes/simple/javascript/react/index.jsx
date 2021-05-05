@@ -66,7 +66,10 @@ class Window extends Component {
 	}
 
 	render(){
-		var navLinks = Array.from(document.querySelectorAll('header nav.primary li a'));
+		// Used for routing
+		var allFormattedNavLinks = [];
+		// Get top level nav links
+		var navLinks = Array.from(document.querySelectorAll('header nav.primary > ul > li > a'));
 		var formattedNavLinks = [];
 		navLinks.forEach((link) => {
 			var formattedLink = {};
@@ -74,7 +77,20 @@ class Window extends Component {
 			var urlSegment = link.href.split('/').reverse()[1] !== document.domain ? '/' + link.href.split('/').reverse()[1] : '/home';
 			formattedLink.URLSegment = urlSegment;
 			formattedLink.pagetype = link.attributes.pagetype.value;
+			// Get dropdown nav links
+			formattedLink.children = [];
+			var subPages = Array.from(link.parentElement.querySelectorAll('ul.nav-dropdown li a'));
+			subPages.forEach((subPage) => {
+				var formattedSubPageLink = {};
+				formattedSubPageLink.Title = subPage.innerText;
+				var subPageUrlSegment = subPage.href.replace(document.location.origin, '');
+				formattedSubPageLink.URLSegment = subPageUrlSegment;
+				formattedSubPageLink.pagetype = subPage.attributes.pagetype.value;
+				formattedLink.children.push(formattedSubPageLink);
+				allFormattedNavLinks.push(formattedSubPageLink);
+			});
 			formattedNavLinks.push(formattedLink);
+			allFormattedNavLinks.push(formattedLink);
 		});
 
 		var style;
@@ -101,6 +117,19 @@ class Window extends Component {
 									<Link to={item.URLSegment}>
 										{item.Title}
 									</Link>
+									{item.children.length ?
+										<ul className="main-nav-dropdown">
+											{item.children.map((subPageItem) => (
+												<li onClick={this.toggleNav} key={item.children.indexOf(subPageItem)}>
+													<Link to={subPageItem.URLSegment}>
+														{subPageItem.Title}
+													</Link>
+												</li>
+											))}
+										</ul>
+										:
+										''
+									}
 								</li>
 							))}
 						</ul>
@@ -109,8 +138,8 @@ class Window extends Component {
 						<Route exact path='/'>
 							<Page fetchViewableData={fetchViewableData}/>
 						</Route>
-						{formattedNavLinks.map((item) => (
-							<Route key={formattedNavLinks.indexOf(item)} path={item.URLSegment}>
+						{allFormattedNavLinks.map((item) => (
+							<Route key={allFormattedNavLinks.indexOf(item)} path={item.URLSegment}>
 									{this.renderSwitch(item.pagetype)}
 							</Route>
 						))}

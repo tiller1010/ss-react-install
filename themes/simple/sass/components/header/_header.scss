@@ -27,6 +27,7 @@ header.header[role='banner']{
 		margin: 0;
 		list-style: none;
 		li{
+			position: relative;
 			margin: 0 10px;
 			list-style-type: none;
 			transition: background-color .25s ease;
@@ -35,12 +36,28 @@ header.header[role='banner']{
 				a{
 					color: #fff;
 				}
+				ul.main-nav-dropdown{
+					display: block;
+				}
 			}
 			a{
 				display: block;
 				padding: 20px;
 				text-decoration: none;
 				color: #000;
+			}
+			ul.main-nav-dropdown{
+				position: absolute;
+				top: 100%;
+				left: 0;
+				display: none;
+				background-color: #000;
+				li {
+					margin: 0;
+					a {
+						color: #fff;
+					}
+				}
 			}
 		}
 	}
@@ -68,6 +85,11 @@ header.header[role='banner']{
 				}
 				a{
 					color: #fff;
+				}
+				ul.main-nav-dropdown{
+					position: static;
+					display: block;
+					background-color: unset;
 				}
 			}
 		}
