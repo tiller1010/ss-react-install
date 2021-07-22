@@ -38,6 +38,11 @@ class Article extends DataObject {
 		);
 	}
 
+	public function Link()
+	{
+		return $this->BlogPage->Link('/articles/' . $this->URLSegment);
+	}
+
 	public function onBeforeWrite()
 	{
 		parent::onBeforeWrite();
